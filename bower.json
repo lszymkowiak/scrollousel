@@ -1,7 +1,20 @@
 {
 	"name": "Scrollousel",
 	"version": "0.2.0",
-	"main": ["css/jquery.scrollusel.css", "jquery.scrollusel.min.css"],	
+	"author": "Łukasz Szymkowiak <poczta@lszymkowiak.pl>",
+	"description": "",
+	"main": [
+		"css/jquery.scrollusel.css",
+		"jquery.scrollusel.min.css"
+	],	
+	"keywords": [],
+	"license": "MIT",
+	"ignore": [
+		"/node_modules",
+		"/src",
+		"gruntfile.json",
+		"package.json"
+	],
 	"dependencies": {
 		"jquery": ">=1.7"
 	}
