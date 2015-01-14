@@ -1,0 +1,16 @@
+/*!
+ * Scrollousel v0.2.0
+ * Copyright 2015 Łukasz Szymkowiak <poczta@lszymkowiak.pl>
+ * Licensed under MIT (http://rdev.pl/license/MIT)
+ */
+
+.scrollusel { height:100%; overflow:hidden; width:100%; position:relative; }
+.scrollusel .pane { height:100%; width:100%; position:absolute; top:0; left:0; }
+.scrollusel .item { float:left; height:100%; overflow:hidden; position:relative; }
+.scrollusel .item > * { height:100%; }
+
+.scrollusel .control { height:100%; width:100%; position:absolute; top:0; left:0; }
+.scrollusel .control div { background-repeat:no-repeat; cursor:pointer; height:100%; opacity:0.5; width:50%; position:absolute; top:0; }
+.scrollusel .control div:hover { opacity:1; }
+.scrollusel .control div.prev { background-image:url("../images/arrow-prev.png"); background-position:left 50px center; left:0; }
+.scrollusel .control div.next { background-image:url("../images/arrow-next.png"); background-position:right 50px center; right:0; }

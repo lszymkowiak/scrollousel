@@ -1,3 +1,9 @@
+/*!
+ * Scrollousel v0.2.0
+ * Copyright 2015 Łukasz Szymkowiak <poczta@lszymkowiak.pl>
+ * Licensed under MIT (http://rdev.pl/license/MIT)
+ */
+
 ;(function($, window, document, undefined) {
 
 	var pluginName = 'scrollusel',
@@ -51,25 +57,39 @@
 
 		setStart: function() {
 			var that = this;
-			var index = $(that.element).find('.item'+that.settings.start).index() < 0 ? 0 : $(that.element).find('.item'+that.settings.start).index();
+			var copy, index, start, total;
 
-			$(that.element).find('.item:eq('+index+')').addClass('active');
+			index = $(that.element).find('.item'+that.settings.start).index() < 0 ? 0 : $(that.element).find('.item'+that.settings.start).index();
+			total = $(that.element).find('.item').length;
 
-			switch (index) {
-				case 0:
-					var times = 1;
+			switch (that.settings.position) {
+				case 'left':
+					copy = total - 2;
+					start = 1;
 					break;
-				case 1:
-					var times = $(that.element).find('.item').length;
+				case 'right':
+					copy = 1;
+					start = total -2;
 					break;
-				default:
-					var times = $(that.element).find('.item').length - index + 1;
+				case 'center':
+					copy = Math.ceil(total / 2);
+					start = Math.floor(total / 2 - 1);
 					break;
 			}
 
-			for (var i = times; i > 0; i--) {
-				$(that.element).find('.item:last').insertBefore($(that.element).find('.item:first'));
-			};
+			switch (index) {
+				case 0:
+					break;
+				case 1:
+					copy += 1;
+					break;
+				default:
+					copy = Math.abs(copy - Math.abs(index - total));
+					break;
+			}
+
+			$(that.element).find('.item:gt('+copy+')').insertBefore($(that.element).find('.item:first'));
+			$(that.element).find('.item:eq('+start+')').addClass('active');
 		},
 
 		generate: function() {
@@ -83,7 +103,7 @@
 				var w = that.settings.width == 'full' ? that.vars.width : that.settings.width;
 				$(this).css('width', w);
 				w = $(this).width();
-				widest = widest < w ? w : widest
+				widest = widest < w ? w : widest;
 				pane += w;
 			});
 
