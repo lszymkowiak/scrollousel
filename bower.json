@@ -1,8 +1,17 @@
 {
-	"name": "Scrollousel",
-	"version": "0.2.0",
-	"main": ["css/jquery.scrollusel.css", "jquery.scrollusel.min.css"],	
-	"dependencies": {
-		"jquery": ">=1.7"
-	}
+  "name": "scrollousel",
+  "version": "0.2.0",
+  "homepage": "https://github.com/lszymkowiak/scrollousel",
+  "authors": [
+    "Łukasz Szymkowiak <ryzy82@gmail.com>"
+  ],
+  "main": ["css/jquery.scrollousel.css", "js/jquery.scrollousel.min.js"],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
 }
