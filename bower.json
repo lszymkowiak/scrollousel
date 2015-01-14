@@ -1,0 +1,8 @@
+{
+	"name": "Scrollousel",
+	"version": "0.2.0",
+	"main": ["css/jquery.scrollusel.css", "jquery.scrollusel.min.css"],	
+	"dependencies": {
+		"jquery": ">=1.7"
+	}
+}
