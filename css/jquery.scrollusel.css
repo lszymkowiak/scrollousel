@@ -1,14 +1,17 @@
 /*!
- * Scrollousel v0.2.0
- * Copyright 2015 Łukasz Szymkowiak <poczta@lszymkowiak.pl>
- * Licensed under MIT (http://rdev.pl/license/MIT)
+ * scrollousel,  version: 0.3.0
+ * http://lszymkowiak.com/scrollousel
+ * Copyright 2015 Łukasz Szymkowiak <dev@lszymkowiak.com>
+ * Licensed under MIT (https://github.com/lszymkowiak/scrollousel/blob/master/LICENSE)
  */
 
+/* scrollusel base - shouldn't be modify */
 .scrollusel { height:100%; overflow:hidden; width:100%; position:relative; }
-.scrollusel .pane { height:100%; width:100%; position:absolute; top:0; left:0; }
+.scrollusel .pane { height:100%; width:2000px; position:absolute; top:0; left:0; }
 .scrollusel .item { float:left; height:100%; overflow:hidden; position:relative; }
-.scrollusel .item > * { height:100%; }
+.scrollusel .item > img { height:100%; }
 
+/* default control style - can be modified */
 .scrollusel .control { height:100%; width:100%; position:absolute; top:0; left:0; }
 .scrollusel .control div { background-repeat:no-repeat; cursor:pointer; height:100%; opacity:0.5; width:50%; position:absolute; top:0; }
 .scrollusel .control div:hover { opacity:1; }

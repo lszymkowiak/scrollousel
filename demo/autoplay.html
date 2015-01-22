@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Scrollousel - autoplay</title>
+	<link rel="stylesheet" href="../css/jquery.scrollusel.css">
+	<link rel="stylesheet" href="css/demo.css">
+</head>
+<body>
+
+	<h2>Autoplay option</h2>
+
+	<div id="default" class="scrollusel" data-autoplay='[2000, "right", true]'>
+		<div class="pane">
+			<div class="item">
+				<img src="images/item-1.jpg" alt="">
+				<div class="no">1</div>
+			</div>
+			<div class="item">
+				<img src="images/item-2.jpg" alt="">
+				<div class="no">2</div>
+			</div>
+			<div class="item">
+				<img src="images/item-3.jpg" alt="">
+				<div class="no">3</div>
+			</div>
+			<div class="item">
+				<img src="images/item-4.jpg" alt="">
+				<div class="no">4</div>
+			</div>
+			<div class="item">
+				<img src="images/item-5.jpg" alt="">
+				<div class="no">5</div>
+			</div>
+			<div class="item">
+				<img src="images/item-6.jpg" alt="">
+				<div class="no">6</div>
+			</div>
+			<div class="item">
+				<img src="images/item-7.jpg" alt="">
+				<div class="no">7</div>
+			</div>
+		</div>
+		<div class="control">
+			<div class="prev"></div>
+			<div class="next"></div>
+		</div>
+	</div>
+
+	<div class="container">
+		<p class="strong">Autoplay can be set:</p>
+		<ul>
+			<li>
+				via <code>data-*</code> attribute
+<pre>&lt;div class="scrollusel" data-autoplay='[2000, "right", true]'&gt...&lt/div&gt</pre>
+			</li>
+			<li>
+				programatically via options
+<pre>
+$('.scrollusel').scrollusel({
+    autoplay: [2000, "right", true]
+});
+</pre>
+			</li>
+		</ul>
+		<br><hr><br>
+		<p class="strong">Option name: <code>autoplay</code></p>
+		<p>Value type: <code>array</code></p>
+		<p>Format: <code>[timeout, direction, pause-on-hover]</code></p>
+		<ul class="indent">
+			<li><code>timeout</code> (integer) - time in miliseconds</li>
+			<li><code>direction</code> (string) - avaliable values <code>"left"</code>, <code>"right</code></li>
+			<li><code>pause-on-hover</code> (boolean) - whether pause when mouse is over scrollousel</li>
+		</ul>
+		<p>Default value: <code>[0, "left", true]</code></p>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="../js/jquery.scrollusel.min.js"></script>
+	
+</body>
+</html>

@@ -1,27 +1,30 @@
 /*!
- * Scrollousel v0.2.0
- * Copyright 2015 Łukasz Szymkowiak <poczta@lszymkowiak.pl>
- * Licensed under MIT (http://rdev.pl/license/MIT)
+ * scrollousel,  version: 0.3.0
+ * http://lszymkowiak.com/scrollousel
+ * Copyright 2015 Łukasz Szymkowiak <dev@lszymkowiak.com>
+ * Licensed under MIT (https://github.com/lszymkowiak/scrollousel/blob/master/LICENSE)
  */
 
 ;(function($, window, document, undefined) {
 
-	var pluginName = 'scrollusel',
-		defaults = {
-			speed: 500,
-			start: ':first',
-			width: 'auto',
-			position: 'left',
-			offset: 0,
-		};
+	var pluginName = 'scrollusel';
+	var defaults = {
+		speed: 500,
+		start: ':first',
+		width: 'auto',
+		align: 'left',
+		offset: 0,
+		autoplay: [0, 'left', true],
+	};
 
-	function Plugin (element, options) {
+	function Plugin(element, options) {
 		this.element = element;
 		this.settings = $.extend({}, defaults, $(this.element).data(), options);
 		this._defaults = defaults;
 		this._name = pluginName;
 		this.vars = {
 			running: false,
+			timeout: null,
 			width: 0
 		};
 		this.init();
@@ -30,8 +33,8 @@
 	$.extend(Plugin.prototype, {
 		init: function() {
 			var that = this;
-			
-			that.setStart();
+
+			that.shift();
 
 			$(that.element).find('.prev').click(function(e) {
 				that.scroll('prev', 'last', 'insertBefore', 'first');
@@ -43,30 +46,33 @@
 				e.preventDefault();
 			});
 
-			$(that.element).on('click', '.item .check', function(e) {
-				$(this).parents('.products').toggleClass('active');
-				e.preventDefault();
-			});
+			if (parseInt(that.settings.autoplay[0]) > 0 && that.settings.autoplay[2] === true) {
+				$(that.element).mouseenter(function(e) {
+					clearTimeout(that.vars.timeout);
+				}).mouseleave(function() {
+					that.autoplay();
+				});
+			}
 
 			$(window).resize(function() {
-				that.generate();
+				that.adjust();
+			}).load(function() {
+				if ($(that.element).is(':hover') === false) {
+					that.autoplay();
+				}
 			});
 
-			that.generate();
+			that.adjust();
 		},
 
-		setStart: function() {
+		shift: function() {
 			var that = this;
 			var copy, index, start, total;
 
 			index = $(that.element).find('.item'+that.settings.start).index() < 0 ? 0 : $(that.element).find('.item'+that.settings.start).index();
 			total = $(that.element).find('.item').length;
 
-			switch (that.settings.position) {
-				case 'left':
-					copy = total - 2;
-					start = 1;
-					break;
+			switch (that.settings.align) {
 				case 'right':
 					copy = 1;
 					start = total -2;
@@ -74,6 +80,11 @@
 				case 'center':
 					copy = Math.ceil(total / 2);
 					start = Math.floor(total / 2 - 1);
+					break;
+				default:
+				case 'left':
+					copy = total - 2;
+					start = 1;
 					break;
 			}
 
@@ -92,7 +103,7 @@
 			$(that.element).find('.item:eq('+start+')').addClass('active');
 		},
 
-		generate: function() {
+		adjust: function() {
 			var that = this;
 			var pane = 0;
 			var widest = 0;
@@ -116,7 +127,7 @@
 			var active = $(this.element).find('.item.active');
 			var position = $(active).position().left;
 			var offset = position;
-			switch (this.settings.position) {
+			switch (this.settings.align) {
 				case 'right':
 					offset -= this.vars.width - $(active).width();
 					break;
@@ -138,6 +149,8 @@
 			if (that.vars.running) return;
 			that.vars.running = true;
 
+			clearTimeout(that.vars.timeout);
+
 			$(that.element).find('.item:'+clone).clone()[insert]($(that.element).find('.item:'+to));
 
 			that.resetPosition();
@@ -152,7 +165,21 @@
 				$(that.element).find('.item:'+clone).remove();
 				that.resetPosition();
 				that.vars.running = false;
+				that.autoplay();
 			});
+		},
+
+		autoplay: function() {
+			var that = this;
+			if (parseInt(that.settings.autoplay[0]) > 0) {
+				that.vars.timeout = setTimeout(function() {
+					if (that.settings.autoplay[1] == 'right') {
+						that.scroll('prev', 'last', 'insertBefore', 'first');
+					} else {
+						that.scroll('next', 'first', 'insertAfter', 'last');
+					}
+				}, that.settings.autoplay[0]);
+			}
 		}
 	});
 
@@ -165,5 +192,9 @@
 
 		return this;
 	};
+
+	$(document).ready(function() {
+    	$('.'+pluginName)[pluginName]();
+	});
 
 })(jQuery, window, document);
