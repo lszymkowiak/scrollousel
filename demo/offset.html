@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Scrollousel - strart slide</title>
+	<link rel="stylesheet" href="../css/jquery.scrollusel.css">
+	<link rel="stylesheet" href="css/demo.css">
+</head>
+<body>
+
+	<h2>Active slide offset</h2>
+
+	<div id="default" class="scrollusel" data-offset='100'>
+		<div class="pane">
+			<div class="item">
+				<img src="images/item-1.jpg" alt="">
+				<div class="no">1</div>
+			</div>
+			<div class="item">
+				<img src="images/item-2.jpg" alt="">
+				<div class="no">2</div>
+			</div>
+			<div class="item">
+				<img src="images/item-3.jpg" alt="">
+				<div class="no">3</div>
+			</div>
+			<div class="item">
+				<img src="images/item-4.jpg" alt="">
+				<div class="no">4</div>
+			</div>
+			<div class="item">
+				<img src="images/item-5.jpg" alt="">
+				<div class="no">5</div>
+			</div>
+			<div class="item">
+				<img src="images/item-6.jpg" alt="">
+				<div class="no">6</div>
+			</div>
+			<div class="item">
+				<img src="images/item-7.jpg" alt="">
+				<div class="no">7</div>
+			</div>
+		</div>
+		<div class="control">
+			<div class="prev"></div>
+			<div class="next"></div>
+		</div>
+	</div>
+
+	<div class="container">
+		<p class="strong">Active slide left offset can be set:</p>
+		<ul>
+			<li>
+				via <code>data-*</code> attribute
+<pre>&lt;div class="scrollusel" data-offset='100'&gt...&lt/div&gt</pre>
+			</li>
+			<li>
+				programatically via options
+<pre>
+$('.scrollusel').scrollusel({
+    offset: 100
+});
+</pre>
+			</li>
+		</ul>
+		<br><hr><br>
+		<p class="strong">Option name: <code>offset</code></p>
+		<p>Value type: <code>integer</code></p>
+		<p>Value type: <code>pixels</code></p>
+		<p>Default value: <code>0</code></p>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="../js/jquery.scrollusel.min.js"></script>
+	
+</body>
+</html>

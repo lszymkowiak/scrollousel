@@ -2,6 +2,7 @@
 body { font-family:sans-serif; text-align:center; }
 h2 { text-align:center; margin:50px 0; }
 .scrollusel { height:400px; }
+.scrollusel .item { background-color:#eee; }
 .scrollusel .no { background-color:#000; color:#fff; font-size:40px; font-weight:bold; padding:10px 15px; position:absolute; top:0; left:0; }
 
 .container { margin:50px auto; }
@@ -11,6 +12,7 @@ h2 { text-align:center; margin:50px 0; }
 
 .container  { margin:50px auto; text-align:left; width:80% }
 .container * { line-height:1.4; }
+.container a { color:#336699; }
 .container p { font-size:14px; margin-bottom:12.5px; }
 .container ul { padding-left:20px; }
 .container ul.indent { margin-left:20px; }

@@ -9,17 +9,17 @@
 
 	var pluginName = 'scrollusel';
 	var defaults = {
+		autoplay: [0, 'left', true],
+		align: 'left',
+		offset: 0,
 		speed: 500,
 		start: ':first',
 		width: 'auto',
-		align: 'left',
-		offset: 0,
-		autoplay: [0, 'left', true],
 	};
 
 	function Plugin(element, options) {
 		this.element = element;
-		this.settings = $.extend({}, defaults, $(this.element).data(), options);
+		this.settings = $.extend({}, defaults, options, $(this.element).data());
 		this._defaults = defaults;
 		this._name = pluginName;
 		this.vars = {
