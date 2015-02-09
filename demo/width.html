@@ -8,36 +8,30 @@
 </head>
 <body>
 
-	<h2>Slide width</h2>
+	<a href="index.html" class="back">&laquo; back to demos list</a>
+	<h2>Slides width</h2>
 
 	<div id="default" class="scrollusel" data-width='full'>
 		<div class="pane">
-			<div class="item">
-				<img src="images/item-1.jpg" alt="">
+			<div class="item item-1">
 				<div class="no">1</div>
 			</div>
-			<div class="item">
-				<img src="images/item-2.jpg" alt="">
+			<div class="item item-2">
 				<div class="no">2</div>
 			</div>
-			<div class="item">
-				<img src="images/item-3.jpg" alt="">
+			<div class="item item-3">
 				<div class="no">3</div>
 			</div>
-			<div class="item">
-				<img src="images/item-4.jpg" alt="">
+			<div class="item item-4">
 				<div class="no">4</div>
 			</div>
-			<div class="item">
-				<img src="images/item-5.jpg" alt="">
+			<div class="item item-5">
 				<div class="no">5</div>
 			</div>
-			<div class="item">
-				<img src="images/item-6.jpg" alt="">
+			<div class="item item-6">
 				<div class="no">6</div>
 			</div>
-			<div class="item">
-				<img src="images/item-7.jpg" alt="">
+			<div class="item item-7">
 				<div class="no">7</div>
 			</div>
 		</div>
@@ -58,7 +52,7 @@
 				programatically via options
 <pre>
 $('.scrollusel').scrollusel({
-    width: 'full'
+	width: 'full'
 });
 </pre>
 			</li>
@@ -71,12 +65,13 @@ $('.scrollusel').scrollusel({
 		<ul>
 			<li><code>'auto'</code> - auto width, best suited for slides containing images</li>
 			<li><code>'full'</code> - slide width is inherited from container width</li>
-			<li><code>integer</code> (integer) - fixed width in pixels</li>
+			<li><code>integer</code> - fixed width in pixels</li>
+			<li><code>X%</code> - percentage width of container (100% == 'full')</li>
 		</ul>
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="../js/jquery.scrollusel.min.js"></script>
-	
+
 </body>
 </html>

@@ -11,10 +11,16 @@
 	var defaults = {
 		autoplay: [0, 'left', true],
 		align: 'left',
+		// infinity: false,
 		offset: 0,
 		speed: 500,
 		start: ':first',
 		width: 'auto',
+		width_xs: false,
+		width_sm: false,
+		width_md: false,
+		width_lg: false,
+		onInit: null,
 	};
 
 	function Plugin(element, options) {
@@ -23,6 +29,8 @@
 		this._defaults = defaults;
 		this._name = pluginName;
 		this.vars = {
+			// active: 1,
+			items: 0,
 			running: false,
 			timeout: null,
 			width: 0
@@ -61,29 +69,29 @@
 					that.autoplay();
 				}
 			});
-
+	
 			that.adjust();
 		},
 
 		shift: function() {
 			var that = this;
-			var copy, index, start, total;
+			var copy, index, start;
 
 			index = $(that.element).find('.item'+that.settings.start).index() < 0 ? 0 : $(that.element).find('.item'+that.settings.start).index();
-			total = $(that.element).find('.item').length;
+			that.vars.items = $(that.element).find('.item').length;
 
 			switch (that.settings.align) {
 				case 'right':
 					copy = 1;
-					start = total -2;
+					start = that.vars.items -2;
 					break;
 				case 'center':
-					copy = Math.ceil(total / 2);
-					start = Math.floor(total / 2 - 1);
+					copy = Math.ceil(that.vars.items / 2);
+					start = Math.floor(that.vars.items / 2 - 1);
 					break;
 				default:
 				case 'left':
-					copy = total - 2;
+					copy = that.vars.items - 2;
 					start = 1;
 					break;
 			}
@@ -95,7 +103,7 @@
 					copy += 1;
 					break;
 				default:
-					copy = Math.abs(copy - Math.abs(index - total));
+					copy = Math.abs(copy - Math.abs(index - that.vars.items));
 					break;
 			}
 
@@ -107,15 +115,17 @@
 			var that = this;
 			var pane = 0;
 			var widest = 0;
+			var iw = 0;
 
 			that.vars.width = $(that.element).width();
 
+			var w = that.calculateWidth();
+			
 			$(that.element).find('.item').each(function(k, v) {
-				var w = that.settings.width == 'full' ? that.vars.width : that.settings.width;
 				$(this).css('width', w);
-				w = $(this).width();
-				widest = widest < w ? w : widest;
-				pane += w;
+				iw = $(this).width();
+				widest = widest < iw ? iw : widest;
+				pane += iw;
 			});
 
 			$(that.element).find('.pane').css('width', pane + widest);
@@ -123,8 +133,36 @@
 			that.resetPosition();
 		},
 
+		calculateWidth: function() {
+			var that = this;
+			var w = that.settings.width;
+			var width = window.innerWidth;
+
+			if (that.settings.width_xs && width >= that.settings.width_xs[0]) {
+				w = that.settings.width_xs[1];
+			}
+			if (that.settings.width_sm && width >= that.settings.width_sm[0]) {
+				w = that.settings.width_sm[1];
+			}
+			if (that.settings.width_md && width >= that.settings.width_md[0]) {
+				w = that.settings.width_md[1];
+			}
+			if (that.settings.width_lg && width >= that.settings.width_lg[0]) {
+				w = that.settings.width_lg[1];
+			}
+
+			if (w == 'full') {
+				w = that.vars.width;
+			} else if (String(w).substr(w.length - 1) === '%') {
+				w = that.vars.width * parseInt(w) / 100;
+			}
+
+			return w;
+		},
+
 		getOffset: function() {
 			var active = $(this.element).find('.item.active');
+			// console.log(active);
 			var position = $(active).position().left;
 			var offset = position;
 			switch (this.settings.align) {
@@ -135,7 +173,8 @@
 					offset -= this.vars.width / 2 - $(active).width() / 2;
 					break;
 			}
-			return 0 - offset + this.settings.offset;
+
+			return 0 - offset + (String(this.settings.offset).substr(this.settings.offset.length - 1) === '%' ? (parseInt(this.settings.offset) * this.vars.width / 100) : parseInt(this.settings.offset));
 		},
 
 		resetPosition: function() {
@@ -148,21 +187,35 @@
 
 			if (that.vars.running) return;
 			that.vars.running = true;
+			// that.vars.active += (direction == 'next' ? 1 : -1);
 
 			clearTimeout(that.vars.timeout);
 
-			$(that.element).find('.item:'+clone).clone()[insert]($(that.element).find('.item:'+to));
+			// console.log(that.vars.active+' > '+that.vars.items);
+			// if (that.settings.infinity === false && that.vars.active > that.vars.items) {
+			// 	console.log('end prev');
+			// 	that.vars.active = 1;
+			// } else if (that.settings.infinity === false && that.vars.active < 1) {
+			// 	console.log('end prev');
+			// } else if (that.vars.infinity == true) {
+			// 	$(that.element).find('.item:'+clone).clone()[insert]($(that.element).find('.item:'+to));
+			// 	that.resetPosition();
+			// }
+			// console.log(find);
 
+			$(that.element).find('.item:'+clone).clone()[insert]($(that.element).find('.item:'+to));
 			that.resetPosition();
 
-			$(active)[direction]('.item').addClass('active');
+			$(active)[direction]().addClass('active');
+			// $(that.element).find('.item:eq('+that.vars.active+')').addClass('active');
 			$(active).removeClass('active');
-			$(active).find('.products.active').removeClass('active');
 
 			$(that.element).find('.pane').clearQueue().animate({
 				left: this.getOffset()
 			}, that.settings.speed, function() {
-				$(that.element).find('.item:'+clone).remove();
+				// if (that.vars.infinity == true) {
+					$(that.element).find('.item:'+clone).remove();
+				// }
 				that.resetPosition();
 				that.vars.running = false;
 				that.autoplay();
@@ -193,8 +246,9 @@
 		return this;
 	};
 
-	$(document).ready(function() {
-    	$('.'+pluginName)[pluginName]();
+	$(window).load(function() {
+		$('.'+pluginName)[pluginName]();
 	});
+
 
 })(jQuery, window, document);

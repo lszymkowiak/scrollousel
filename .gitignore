@@ -1,4 +1,7 @@
 /node_modules
-/src
+/src/demo
+/src/gfx
+/src/json
+/src/web
 gruntfile.js
 package.json

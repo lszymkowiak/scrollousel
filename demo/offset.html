@@ -2,41 +2,42 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Scrollousel - strart slide</title>
+	<title>Scrollousel - active slide offset</title>
 	<link rel="stylesheet" href="../css/jquery.scrollusel.css">
 	<link rel="stylesheet" href="css/demo.css">
 </head>
 <body>
 
+	<a href="index.html" class="back">&laquo; back to demos list</a>
 	<h2>Active slide offset</h2>
 
-	<div id="default" class="scrollusel" data-offset='100'>
+	<div id="default" class="scrollusel" data-offset='10%'>
 		<div class="pane">
-			<div class="item">
+			<div class="item item-1">
 				<img src="images/item-1.jpg" alt="">
 				<div class="no">1</div>
 			</div>
-			<div class="item">
+			<div class="item item-2">
 				<img src="images/item-2.jpg" alt="">
 				<div class="no">2</div>
 			</div>
-			<div class="item">
+			<div class="item item-3">
 				<img src="images/item-3.jpg" alt="">
 				<div class="no">3</div>
 			</div>
-			<div class="item">
+			<div class="item item-4">
 				<img src="images/item-4.jpg" alt="">
 				<div class="no">4</div>
 			</div>
-			<div class="item">
+			<div class="item item-5">
 				<img src="images/item-5.jpg" alt="">
 				<div class="no">5</div>
 			</div>
-			<div class="item">
+			<div class="item item-6">
 				<img src="images/item-6.jpg" alt="">
 				<div class="no">6</div>
 			</div>
-			<div class="item">
+			<div class="item item-7">
 				<img src="images/item-7.jpg" alt="">
 				<div class="no">7</div>
 			</div>
@@ -65,13 +66,17 @@ $('.scrollusel').scrollusel({
 		</ul>
 		<br><hr><br>
 		<p class="strong">Option name: <code>offset</code></p>
-		<p>Value type: <code>integer</code></p>
-		<p>Value type: <code>pixels</code></p>
+		<p>Value type: <code>integer/string</code></p>
 		<p>Default value: <code>0</code></p>
+		<p>Available values:</p>
+		<ul>
+			<li><code>integer</code> - fixed offset in pixels</li>
+			<li><code>X%</code> - percentage offset of container width</li>
+		</ul>
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="../js/jquery.scrollusel.min.js"></script>
-	
+
 </body>
 </html>
