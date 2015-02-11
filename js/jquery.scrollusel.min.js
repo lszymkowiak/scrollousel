@@ -1,5 +1,5 @@
 /*!
- * scrollousel,  version: 0.3.0
+ * scrollousel,  version: 0.4.0
  * http://lszymkowiak.com/scrollousel
  * Copyright 2015 Łukasz Szymkowiak <dev@lszymkowiak.com>
  * Licensed under MIT (https://github.com/lszymkowiak/scrollousel/blob/master/LICENSE)
